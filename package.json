@@ -1,0 +1,22 @@
+{
+  "name": "github-data-with-neo4j-nodejs-and-expressjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaviFdez7/Github-data-with-Neo4j-nodejs-and-expressJS.git"
+  },
+  "author": "Javier Fernández Castillo and Manuel Otero Barbasán",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaviFdez7/Github-data-with-Neo4j-nodejs-and-expressJS/issues"
+  },
+  "homepage": "https://github.com/JaviFdez7/Github-data-with-Neo4j-nodejs-and-expressJS#readme",
+  "dependencies": {
+    "neo4j-driver": "^5.18.0"
+  }
+}
