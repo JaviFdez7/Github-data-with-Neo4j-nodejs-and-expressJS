@@ -13,10 +13,18 @@ async function getUserInfo(username) {
             location
             websiteUrl
             twitterUsername
-            followers {
+            followers(first:100) {
+              nodes {
+                login
+                name
+              }
               totalCount
             }
-            following {
+            following(first:100) {
+              nodes {
+                login
+                name
+              }
               totalCount
             }
           }
