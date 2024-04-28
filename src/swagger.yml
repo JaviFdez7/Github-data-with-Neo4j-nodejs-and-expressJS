@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Mi API
-  description: Descripción de mi API
+  title: API para Github data con Neo4j, nodejs y expressJS
+  description: Esta API integra datos de la API GraphQL de GitHub con una base de datos Neo4j para proporcionar extracción de datos avanzados que no están disponibles directamente a través de GitHub. Utiliza consultas POST para recolectar y almacenar información detallada sobre perfiles de usuario, seguidores, repositorios, issues y asignaciones de miembros a issues desde GitHub. Las consultas GET aprovechan estos datos para ofrecer estadísticas profundas y análisis complejos, permitiendo realizar búsquedas con filtros avanzados y agrupaciones que van más allá de las capacidades del estándar de la API de GitHub.
   version: 1.0.0
 servers:
   - url: http://localhost:3000
@@ -20,14 +20,14 @@ paths:
                   type: string
       responses:
         '200':
-          description: Usuario creado exitosamente
+          description: Solicitud finalizada exitosamente
         '400':
           description: Solicitud incorrecta
         '500':
           description: Error interno del servidor
   /user/followers/following:
     post:
-      summary: Crear repositorios del usuario
+      summary: Crear un usuarios con todos los perfiles a los que sigue y que le siguen
       requestBody:
         required: true
         content:
@@ -39,7 +39,7 @@ paths:
                   type: string
       responses:
         '200':
-          description: Repositorios creados exitosamente
+          description: Solicitud finalizada exitosamente
         '400':
           description: Solicitud incorrecta
         '500':
@@ -58,14 +58,14 @@ paths:
                   type: string
       responses:
         '200':
-          description: Repositorios creados exitosamente
+          description: Solicitud finalizada exitosamente
         '400':
           description: Solicitud incorrecta
         '500':
           description: Error interno del servidor
   /repositories/collaborators:
     post:
-      summary: Crear repositorios del usuario
+      summary: Crear repositorios del usuario y usuarios de los colaboradores
       requestBody:
         required: true
         content:
@@ -77,14 +77,14 @@ paths:
                   type: string
       responses:
         '200':
-          description: Repositorios creados exitosamente
+          description: Solicitud finalizada exitosamente
         '400':
           description: Solicitud incorrecta
         '500':
           description: Error interno del servidor
   /repositories/issues/assignees:
     post:
-      summary: Crear repositorios del usuario
+      summary: Crear repositorios del usuario con todas sus issues y todos los usuarios asignados a dichas issues
       requestBody:
         required: true
         content:
@@ -96,7 +96,7 @@ paths:
                   type: string
       responses:
         '200':
-          description: Repositorios creados exitosamente
+          description: Solicitud finalizada exitosamente
         '400':
           description: Solicitud incorrecta
         '500':
