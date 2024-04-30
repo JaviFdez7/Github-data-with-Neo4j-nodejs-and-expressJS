@@ -101,3 +101,201 @@ paths:
           description: Solicitud incorrecta
         '500':
           description: Error interno del servidor
+  /query/findAssigneesInCommonIssues/{username}:
+    get:
+      summary: Recuperar asignados en problemas comunes
+      description: |
+        Devuelve todos los asignados en problemas donde el nombre de usuario proporcionado también está asignado.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: El nombre de usuario a buscar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Solicitud finalizada exitosamente
+        '400':
+          description: Solicitud incorrecta
+        '500':
+          description: Error interno del servidor
+
+  /query/listSharedFollowers/{username1}/{username2}:
+      get:
+        summary: Listar seguidores compartidos entre dos usuarios
+        description: |
+          Devuelve los seguidores que siguen a ambos usuarios proporcionados.
+        parameters:
+          - name: username1
+            in: path
+            required: true
+            description: Primer nombre de usuario para la búsqueda
+            schema:
+              type: string
+          - name: username2
+            in: path
+            required: true
+            description: Segundo nombre de usuario para la búsqueda
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findSharedIssues/{username1}/{username2}:
+      get:
+        summary: Encontrar problemas compartidos entre dos usuarios
+        description: |
+          Devuelve los problemas a los que ambos usuarios proporcionados están asignados.
+        parameters:
+          - name: username1
+            in: path
+            required: true
+            description: Primer nombre de usuario para la búsqueda
+            schema:
+              type: string
+          - name: username2
+            in: path
+            required: true
+            description: Segundo nombre de usuario para la búsqueda
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findNonUserAssignedIssues/{username}/{repositoryName}:
+      get:
+        summary: Encontrar problemas no asignados a un usuario específico en un repositorio por nombre
+        description: |
+          Devuelve problemas en un repositorio específico identificado por nombre que no están asignados al usuario proporcionado.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario del interesado
+            schema:
+              type: string
+          - name: repositoryName
+            in: path
+            required: true
+            description: Nombre del repositorio a buscar
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findAllUsersContributingInRepositoriesContributedBy/{username}:
+      get:
+        summary: Encontrar todos los usuarios que contribuyen en repositorios donde un usuario ha contribuido
+        description: |
+          Devuelve todos los usuarios que están contribuyendo en los mismos repositorios que el usuario proporcionado.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario del contribuidor
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findUsersFollowedByTheFollowsOfTheUser/{username}:
+      get:
+        summary: Encontrar usuarios seguidos por los seguidos de un usuario
+        description: |
+          Devuelve los usuarios que son seguidos por los seguidos del usuario proporcionado. Incluye los seguidos del usuario solicitado también.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario para buscar sus seguidores y a quiénes siguen
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findIssuesAsignedToUserFollows/{username}:
+      get:
+        summary: Encontrar problemas asignados a los usuarios seguidos por un usuario
+        description: |
+          Devuelve problemas que están asignados a los usuarios que un usuario específico sigue.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario que sigue a otros usuarios
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findRepositoriesWithUserOpenIssues/{username}:
+      get:
+        summary: Encontrar repositorios con problemas abiertos asignados a un usuario
+        description: |
+          Devuelve todos los repositorios que tienen problemas abiertos asignados al usuario proporcionado.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario del asignado
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+
+  /query/findUsersWithSimilarContributions/{username}:
+      get:
+        summary: Encontrar usuarios con contribuciones similares
+        description: |
+          Devuelve usuarios que tienen al menos dos repositorios en común en términos de contribuciones con el usuario proporcionado.
+        parameters:
+          - name: username
+            in: path
+            required: true
+            description: Nombre de usuario para comparar contribuciones
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Solicitud finalizada exitosamente
+          '400':
+            description: Solicitud incorrecta
+          '500':
+            description: Error interno del servidor
+

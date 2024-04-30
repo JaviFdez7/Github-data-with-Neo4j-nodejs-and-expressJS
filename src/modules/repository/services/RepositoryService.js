@@ -147,29 +147,29 @@ const createRepositoriesAndCollaboratorsFromUser = async (data) => {
 
           if(repository.issues?.nodes.length>0)
             for(const issue of repository.issues.nodes){
+                //create isse
+                issue.title = issue.title.replace(/[^a-zA-Z0-9 ]/g, "")
+                const existingIssueQuery = `
+                    MATCH (i:Issue {title: "${issue.title}"})
+                    RETURN i
+                `
+                const existingIssue = await database.executeQuery(existingIssueQuery);
+                if(existingIssue.length<1){
+                    const query = `
+                        MATCH (r:Repository {name: "${repository.name}"})
+                        CREATE (r)-[:HAS]->(i:Issue {
+                            title: "${issue.title}",
+                            closedAt: "${issue.closedAt}",
+                            state: "${issue.state}"
+                        })
+                        RETURN i
+                    `
+                    await database.executeQuery(query);
+                }
               if(issue.assignees?.nodes.length>0)
                 for(const assignee of issue.assignees.nodes){
                     await userData.createUser({username: `${assignee.login}`});
-
-                    const existingIssueQuery = `
-                        MATCH (i:Issue {title: "${issue.title}"})
-                        RETURN i
-                    `
-                    existingIssue = await database.executeQuery(existingIssueQuery);
-
-                    if(existingIssue<1){
-                        console.log("Creando issue")
-                        const query = `
-                            MATCH (u:User {username: "${assignee.login}"})
-                            CREATE (u)-[:IS_ASSIGNED_TO]->(i:Issue {
-                                title: "${issue.title}",
-                                closedAt: "${issue.closedAt}",
-                                state: "${issue.state}"
-                            })
-                            RETURN i
-                        `
-                        await database.executeQuery(query);
-                    } else {
+                    
                         await userData.createUser({username: `${assignee.login}`});
                         const query = `
                             MATCH (u:User {username: "${assignee.login}"})
@@ -178,7 +178,7 @@ const createRepositoriesAndCollaboratorsFromUser = async (data) => {
                             RETURN i
                         `
                         await database.executeQuery(query);
-                    } 
+                    
                 }
             }
       }

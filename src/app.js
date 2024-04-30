@@ -4,6 +4,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./src/swagger.yml');
 const UserRouter = require('./modules/user');
 const RepositoryRouter = require('./modules/repository');
+const Queries = require('./modules/queries');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //  Modules Routes ----------------------------------------------
 app.use(UserRouter);
 app.use(RepositoryRouter);
+app.use(Queries)
 
 // Server -------------------------------------------------------
 const PORT = process.env.PORT || 3000;
